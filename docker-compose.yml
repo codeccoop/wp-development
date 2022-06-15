@@ -1,6 +1,6 @@
 version: "3.9"
 services:
-        wordpress:
+        wp:
                 image: wordpress
                 restart: always
                 hostname: wordpress
@@ -8,12 +8,12 @@ services:
                         - "80:80"
                         - "443:443"
                 volumes:
-                        - ./src:/opt/var/www/html/wp-content/themes/theme_name
+                        - ./src:/var/www/html/wp-content/themes/theme_name
                         - /var/log:/var/log
                 links:
-                        - mariadb:db
+                        - db
                 depends_on:
-                        - mariadb
+                        - db
                 environment:
                         WORDPRESS_DB_HOST: db
                         WORDPRESS_DB_USER: wpuser
@@ -21,7 +21,7 @@ services:
                         WORDPRESS_DB_NAME: wordpress
                         WORDPRESS_TABLE_PREFIX: wp_
                         WORDPRESS_DEBUG: 1
-        mariadb:
+        db:
                 image: mariadb
                 restart: always
                 hostname: mariadb

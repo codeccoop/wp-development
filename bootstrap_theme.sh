@@ -8,12 +8,10 @@ read_name () {
 		echo "A non-empty name is required."
 		read_name
 	fi
-
-	echo $theme_name
 }
 
 name_validation () {
-	echo "Proceed with bootstraping underscores theme with $1 as name? [S/n]"
+	echo "Proceed with bootstraping underscores theme with "$(tput bold)$theme_name$(tput sgr0)" as name? [S/n]"
 	read agreement
 	if [ -z "$agreement" ] || [ "$agreement" -eq "s" ] || [ "$agreement" -eq "S" ]; then
 		echo "Initializing theme"
