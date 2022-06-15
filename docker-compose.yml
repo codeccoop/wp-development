@@ -1,0 +1,37 @@
+version: "3.9"
+services:
+        wordpress:
+                image: wordpress
+                restart: always
+                hostname: wordpress
+                ports:
+                        - "80:80"
+                        - "443:443"
+                volumes:
+                        - ./src:/opt/var/www/html/wp-content/themes/theme_name
+                        - /var/log:/var/log
+                links:
+                        - mariadb:db
+                depends_on:
+                        - mariadb
+                environment:
+                        WORDPRESS_DB_HOST: db
+                        WORDPRESS_DB_USER: wpuser
+                        WORDPRESS_DB_PASSWORD: wppwd
+                        WORDPRESS_DB_NAME: wordpress
+                        WORDPRESS_TABLE_PREFIX: wp_
+                        WORDPRESS_DEBUG: 1
+        mariadb:
+                image: mariadb
+                restart: always
+                hostname: mariadb
+                ports:
+                        - "3306:3306"
+                volumes:
+                        - ./.db:/var/lib/mysql
+                        - /var/log:/var/log
+                environment:
+                        MARIADB_ROOT_PASSWORD: root
+                        MARIADB_DATABASE: wordpress
+                        MARIADB_USER: wpuser
+                        MARIADB_PASSWORD: wppwd
