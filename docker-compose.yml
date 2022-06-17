@@ -2,7 +2,7 @@ version: "3.9"
 services:
         wp:
                 image: wordpress
-                restart: always
+                restart: unless-stopped
                 hostname: wordpress
                 ports:
                         - "80:80"
@@ -23,7 +23,7 @@ services:
                         WORDPRESS_DEBUG: 1
         db:
                 image: mariadb
-                restart: always
+                restart: unless-stopped
                 hostname: mariadb
                 ports:
                         - "3306:3306"
