@@ -13,7 +13,7 @@ read_name () {
 name_validation () {
 	echo "Proceed with bootstraping underscores theme with "$(tput bold)$theme_name$(tput sgr0)" as name? [S/n]"
 	read agreement
-	if [ -z "$agreement" ] || [ "$agreement" -eq "s" ] || [ "$agreement" -eq "S" ]; then
+	if [ -z "$agreement" ] || [ "$agreement" = "s" ] || [ "$agreement" = "S" ]; then
 		echo "Initializing theme"
 	else
 		echo "Bye bye"

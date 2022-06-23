@@ -2,13 +2,12 @@ version: "3.9"
 services:
         wp:
                 image: wordpress
-                restart: unless-stopped
                 hostname: wordpress
                 ports:
                         - "80:80"
                         - "443:443"
                 volumes:
-                        - ./src:/var/www/html/wp-content/themes/theme_name
+                        - ./src:/var/www/html/wp-content/themes/test
                         - /var/log:/var/log
                 links:
                         - db
@@ -23,7 +22,6 @@ services:
                         WORDPRESS_DEBUG: 1
         db:
                 image: mariadb
-                restart: unless-stopped
                 hostname: mariadb
                 ports:
                         - "3306:3306"
