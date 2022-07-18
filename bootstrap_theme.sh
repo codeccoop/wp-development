@@ -31,5 +31,6 @@ find src -type f -exec sed -i -e "s/ _s/ $theme_name/g" {} \;
 find src -type f -exec sed -i -e "s/_s-/$theme_name-/g" {} \;
 find src -type f -exec sed -i -e "s/_S_/${theme_name^^}_/g" {} \;
 sed -i -e "s/theme_name/$theme_name/g" docker-compose.yml
+sed -i -e "s/theme_name/$theme_name/g" Dockerfile
 
 # cd src && composer install && npm install
