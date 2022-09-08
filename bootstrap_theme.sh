@@ -1,36 +1,49 @@
 #! /usr/bin/env bash
 
 read_name () {
-	echo "How does your theme is going to be named?"
-	read theme_name
-	if [ -z "$theme_name" ];
+	echo "Pleas, enter the domain name of your web page: "
+	read fqdn
+	if [ -z "$fqdn" ];
 	then
-		echo "A non-empty name is required."
-		read_name
+		echo "A non-empty domain is required."
+		fqdn
 	fi
 }
 
 name_validation () {
-	echo "Proceed with bootstraping underscores theme with "$(tput bold)$theme_name$(tput sgr0)" as name? [S/n]"
+	echo "Bind the underscores theme to "$(tput bold)$fqdn$(tput sgr0)" domain name and bootstrap it? [S/n]"
 	read agreement
 	if [ -z "$agreement" ] || [ "$agreement" = "s" ] || [ "$agreement" = "S" ]; then
-		echo "Initializing theme"
+		echo "Bootstraping"
 	else
 		echo "Bye bye"
 		exit 1
 	fi
 }
 
+install_wp () {
+    echo "Downloading wordpress source base"
+    mv src _src \
+        && wget https://wordpress.org/latest.zip \
+        && unzip latest.zip \
+        && mv wordpress src \
+        && rm latest.zip \
+        && mv _src src/wp-content/themes/$fqdn
+}
+
 read_name
 name_validation
 
-find src -type f -exec sed -i -e "s/'_s'/'$theme_name'/g" {} \;
-find src -type f -exec sed -i -e "s/_s_/$theme_name_/g" {} \;
-sed -i -e "s/Text Domain: _s/Text Domain: $theme_name/g" src/style.css
-find src -type f -exec sed -i -e "s/ _s/ $theme_name/g" {} \;
-find src -type f -exec sed -i -e "s/_s-/$theme_name-/g" {} \;
-find src -type f -exec sed -i -e "s/_S_/${theme_name^^}_/g" {} \;
-sed -i -e "s/theme_name/$theme_name/g" docker-compose.yml
-sed -i -e "s/theme_name/$theme_name/g" Dockerfile
+find src -type f -exec sed -i -e "s/'_s'/'$fqdn'/g" {} \;
+find src -type f -exec sed -i -e "s/_s_/$fqdn_/g" {} \;
+sed -i -e "s/Text Domain: _s/Text Domain: $fqdn/g" src/style.css
+find src -type f -exec sed -i -e "s/ _s/ $fqdn/g" {} \;
+find src -type f -exec sed -i -e "s/_s-/$fqdn-/g" {} \;
+find src -type f -exec sed -i -e "s/_S_/${fqdn^^}_/g" {} \;
+sed -i -e "s/fqdn/$fqdn/g" Dockerfile
+
+install_wp
+
+echo "Your enviornment is ready to go!"
 
 # cd src && composer install && npm install
