@@ -2,4 +2,4 @@
 
 DIR="$(basename $(cd $(dirname $0) && pwd))"
 
-docker exec "$DIR"-wp-1 wp  --allow-root "$@"
+docker exec "$DIR-wp-1" sh -c "wp  --allow-root $@"
