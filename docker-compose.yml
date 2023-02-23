@@ -31,5 +31,5 @@ services:
     environment:
       MARIADB_ROOT_PASSWORD: root
       MARIADB_DATABASE: wordpress
-      MARIADB_USER: wpuser
+      MARIADB_USER: wpusr
       MARIADB_PASSWORD: wppwd
