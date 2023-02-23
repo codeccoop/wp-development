@@ -15,7 +15,7 @@ services:
      - db
     environment:
       WORDPRESS_DB_HOST: db
-      WORDPRESS_DB_USER: wpuser
+      WORDPRESS_DB_USER: wpusr
       WORDPRESS_DB_PASSWORD: wppwd
       WORDPRESS_DB_NAME: wordpress
       WORDPRESS_TABLE_PREFIX: wp_
