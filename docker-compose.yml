@@ -8,7 +8,7 @@ services:
       - "443:443"
     volumes:
       - ./src:/var/www/html
-      - /var/log:/var/log
+      - ./log:/var/log
     links:
       - db:mysql
     depends_on:
