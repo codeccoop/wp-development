@@ -1,8 +1,12 @@
 version: "3.9"
 services:
   wp:
-    build: .
-    hostname: wordpress
+    build:
+      context: .
+      args:
+        DOMAIN: example.com
+        CAPWD: ca_password
+    hostname: example.com
     ports:
       - "80:80"
       - "443:443"
@@ -12,7 +16,7 @@ services:
     links:
       - db:mysql
     depends_on:
-     - db
+      - db
     environment:
       WORDPRESS_DB_HOST: db
       WORDPRESS_DB_USER: wpusr
