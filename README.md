@@ -6,17 +6,24 @@ Entorn de desenvolupament per wordpress 📰 basat en imatges de docker 🐋
 
 - [docker](https://www.docker.com/)
 - [docker-compose](https://docs.docker.com/compose/)
-- [node](https://nodejs.org/en/) i [npm](https://www.npmjs.com/)
-- [composer](https://getcomposer.org/)
+- [degit](https://github.com/Rich-Harris/degit)
 
-## Instruccions
+## Instal·lació
 
-1. ✍️ `$ ./boostrap_theme.sh` i ens demanarà per quin domini web és el nou tema
-   en el que estem treballant i ens configurarà la plantilla \_underscores\_\_ i
-   l'arxiu YAML de docker-compose
-2. ⏲️ `docker-compose up -d` per aixecar els contenidors de docker de wordpress
-   i mariadb. Si és el primer cop que utilitzes les impatges, docker començarà
-   una descarrega de les imàtges desde els repositoris remots que pot trigar uns
-   minuts. Els següents cops el temps es reduirà a uns parell de segons.
-3. 🚀 Obre el contingut del directori `src/` amb l'editor de codi que més
-   tragradi i comença a desenvolupar
+1. `degit codeccoop/wp-development example.com`
+2. Edit `docker-compose.yml` and set:
+   1. `services[].wp.build.args.CAPWD` your CA password
+   2. `services[].wp.build.args.DOMAIN` your example.com
+   3. `dns add -g projects example.com`
+3. `docker compose build`
+4. `docker compose up -d`
+5. `./wp-cli 'core download'`
+6. `./wp-cli 'core install --url=example.com --title=<Site Title> --admin_user=admin --admin_email=admin@example.com --admin_password=admin --locale=ca_ES'`
+7. `docker compose down`
+8. `dns disable example.com`
+
+## Desenvolupament
+
+1. `dns enable example.com`
+2. `docker compose up -d`
+3. Go to example.com on your browser
