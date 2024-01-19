@@ -6,6 +6,11 @@ ARG CAPWD
 # System packages
 RUN apt update && apt install -y openssl curl
 
+# PHP extensions
+RUN pecl install xdebug
+RUN docker-php-ext-enable xdebug
+COPY .php/90-xdebug.ini "${PHP_INI_DIR}/conf.d"
+
 # Còdec CA
 RUN curl https://oficina.codeccoop.org/nextcloud/s/4Edwn9k3emG2ofJ/download/codec-ca.key > /etc/ssl/private/codec-ca.key
 RUN curl https://oficina.codeccoop.org/nextcloud/s/YgZr9mKdRRpoXsz/download/codec-ca.pem > /etc/ssl/private/codec-ca.pem
