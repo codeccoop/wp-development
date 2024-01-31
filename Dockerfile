@@ -62,4 +62,7 @@ RUN echo "error_log = /var/log/docker-php.log" >> /usr/local/etc/php/php.ini-dev
 RUN curl -o /usr/local/bin/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 RUN chmod +x /usr/local/bin/wp
 
+# Install WordPress
+RUN cp -rf /usr/src/wordpress/* /var/www/html
+
 WORKDIR /var/www/html
