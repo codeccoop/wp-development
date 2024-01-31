@@ -4,7 +4,7 @@ ARG DOMAIN
 ARG CAPWD
 
 # System packages
-RUN apt update && apt install -y openssl curl
+RUN apt update && apt install -y openssl curl less subversion
 
 # PHP extensions
 RUN pecl install xdebug
