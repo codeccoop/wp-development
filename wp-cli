@@ -1,6 +1,6 @@
 #! /bin/bash
 
 DIR="$(basename $(cd $(dirname $0) && pwd))"
-DIR=${DIR/./}
+DIR=${DIR//./}
 
 docker exec "$DIR-wp-1" sh -c "wp  --allow-root $@"
