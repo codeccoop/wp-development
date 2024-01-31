@@ -2,13 +2,13 @@ FROM wordpress:latest
 
 ARG DOMAIN
 ARG CAPWD
+ARG XDEBUG
 
 # System packages
 RUN apt update && apt install -y openssl curl less subversion
 
 # PHP extensions
 RUN pecl install xdebug
-RUN docker-php-ext-enable xdebug
 COPY .php/90-xdebug.ini "${PHP_INI_DIR}/conf.d"
 
 # Còdec CA
@@ -64,5 +64,8 @@ RUN chmod +x /usr/local/bin/wp
 
 # Install WordPress
 RUN cp -rf /usr/src/wordpress/* /var/www/html
+
+# Enable xdebug
+RUN test "$XDEBUG" = 'true' && docker-php-ext-enable xdebug
 
 WORKDIR /var/www/html
