@@ -6,14 +6,14 @@ services:
       args:
         DOMAIN: example.com
         CAPWD: ca_password
-        XDEBUG: ${WORDPRESS_DEBUG}
+        XDEBUG: ${WORDPRESS_XDEBUG}
     hostname: example.com
     extra_hosts:
       - host.docker.internal:host-gateway
     ports:
       - "443:443"
     volumes:
-      - ./src:/var/www/html
+      - ./wp:/var/www/html
       - ./log:/var/log
     links:
       - db:mysql
