@@ -72,8 +72,10 @@ RUN cp -rf /usr/src/wordpress/* /var/www/html
 
 # Enable xdebug
 ARG XDEBUG
-RUN test "$XDEBUG" = 'true' && pecl install xdebug || echo 'Without Xdebug'
-RUN test "$XDEBUG" = 'true' && docker-php-ext-enable xdebug || echo 'Without Xdebug'
+RUN test "$XDEBUG" = 'yes' || "$XDEBUG" = 'true' \
+    && pecl install xdebug || echo 'Without Xdebug'
+RUN test "$XDEBUG" = 'yes' || "$XDEBUG" = 'true' \
+    && docker-php-ext-enable xdebug || echo 'Without Xdebug'
 COPY .php/90-xdebug.ini "${PHP_INI_DIR}/conf.d"
 
 WORKDIR /var/www/html
