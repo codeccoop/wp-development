@@ -68,7 +68,7 @@ RUN curl -o /usr/local/bin/wp \
     && chmod +x /usr/local/bin/wp
 
 # Install WordPress
-RUN cp -rf /usr/src/wordpress/* /var/www/html
+RUN test -z "$(ls -A /var/www/html)" && cp  -rf /usr/src/wordpress/* /var/www/html || echo "wordpress already installed" 
 
 # Enable xdebug
 ARG XDEBUG
