@@ -46,15 +46,15 @@ RUN openssl x509 \
   -extfile /etc/ssl/private/apache-selfsigned.ext \
   -passin pass:$CAPWD
 
-# SSL Config
-COPY .ssl/ssl-params.conf /etc/apache2/conf-available/ssl-params.conf
-RUN ln -s /etc/apache2/conf-available/ssl-params.conf \
-    /etc/apache2/conf-enabled/ssl-params.conf
-COPY .ssl/default-ssl.conf /etc/apache2/sites-available/default-ssl.conf
-RUN ln -s /etc/apache2/sites-available/default-ssl.conf \
-    /etc/apache2/sites-enabled/default-ssl.conf
-
 # Apache
+RUN a2dissite 000-default
+
+COPY .apache/ssl-params.conf /etc/apache2/conf-available/ssl-params.conf
+RUN a2enconf ssl-params
+
+COPY .apache/wp.conf /etc/apache2/sites-available/wp.conf
+RUN a2ensite wp
+
 RUN a2enmod ssl
 RUN a2enmod headers
 RUN echo "ServerName $DOMAIN" >> /etc/apache2/apache2.conf
