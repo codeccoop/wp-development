@@ -25,7 +25,7 @@ Entorn de desenvolupament per wordpress 📰 basat en imatges de docker 🐋
 6. Arribats fins aquí, pots aixecar i tumbar els teus contenidors amb les comandes `docker compose up -d` i `docker compose down`
 7. Fes servir l'arxiu executable `wp-cli` per accedir al [wp-cli](https://wp-cli.org/) disponible dins el contenidor. Executa la
    comanda següent per iniciar la instal·lació i configuració inicial de WordPress:
-   `./wp-cli 'core install --url=example.coop --title=<Site Title> --admin_user=admin --admin_email=admin@example.com --admin_password=admin --locale=ca_ES'`
+   `./wp-cli 'core install --url=example.coop --title=<Site Title> --admin_user=admin --admin_email=admin@example.coop --admin_password=admin --locale=ca_ES'`
 10. Abans de visitar la pàgina, fes servir [dns-cli](https://github.com/codeccoop/hosts-cli) per registrar el teu domini de desenvolupament
     al sistema de resolució de DNS local: `dns add example.coop`
 12. Obre el navegador i visita https://example.coop 🚀.
