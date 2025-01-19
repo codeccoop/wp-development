@@ -78,4 +78,14 @@ RUN test "$XDEBUG" = 'yes' || "$XDEBUG" = 'true' \
     && docker-php-ext-enable xdebug || echo 'Without Xdebug'
 COPY .php/90-xdebug.ini "${PHP_INI_DIR}/conf.d"
 
+# PHP upload file size
+RUN sed -i 's/upload_max_filesize/; upload_max_filesize/' "${PHP_INI_DIR}/php.ini-development"
+RUN sed -i 's/upload_max_filesize/; upload_max_filesize/' "${PHP_INI_DIR}/php.ini-production"
+RUN sed -i 's/post_max_size/; post_max_size/' "${PHP_INI_DIR}/php.ini-development"
+RUN sed -i 's/post_max_size/; post_max_size/' "${PHP_INI_DIR}/php.ini-production"
+RUN echo "upload_max_filesize = 40M" >> "${PHP_INI_DIR}/php.ini-development"
+RUN echo "upload_max_filesize = 40M" >> "${PHP_INI_DIR}/php.ini-production"
+RUN echo "post_max_size = 50M" >> "${PHP_INI_DIR}/php.ini-development"
+RUN echo "post_max_size = 50M" >> "${PHP_INI_DIR}/php.ini-production"  
+
 WORKDIR /var/www/html
