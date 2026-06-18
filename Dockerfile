@@ -20,9 +20,9 @@ RUN curl -L -o /usr/local/bin/phpunit \
     && chmod a+x /usr/local/bin/phpunit
 
 # Còdec CA
-RUN curl -qL https://oficina.codeccoop.org/nextcloud/s/c7C99nMJfWtCP4d/download/codec-ca.key \
+RUN curl -qL https://oficina.codeccoop.org/nextcloud/public.php/dav/files/c7C99nMJfWtCP4d \
     > /etc/ssl/private/codec-ca.key
-RUN curl -qL https://oficina.codeccoop.org/nextcloud/s/C8MZqQq54ZTooJ7/download/codec-ca.pem \
+RUN curl -qL https://oficina.codeccoop.org/nextcloud/public.php/dav/files/C8MZqQq54ZTooJ7 \
     > /etc/ssl/private/codec-ca.pem
 
 # SSL Certificate
